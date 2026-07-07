@@ -1,0 +1,52 @@
+seed: 42
+device: auto
+output_dir: outputs/smoke
+
+data:
+  synthetic: true
+  num_samples: 8
+  num_classes: 2
+  max_channels: 16
+  max_time: 128
+  num_sensor_types: 4
+  use_reports: true
+  num_workers: 0
+
+model:
+  source_tokens: 4
+  d_model: 32
+  temporal_stride: 8
+  sensor_types: 4
+  rvq_codebooks: 2
+  rvq_codes: 16
+  transformer_layers: 1
+  transformer_heads: 4
+  dropout: 0.0
+  separated_attention: true
+  use_sensor_encoder: true
+  use_cross_attention: true
+  use_rvq: true
+  use_rope: true
+  text_dim: 64
+  projection_dim: 32
+  num_classes: 2
+
+loss:
+  lambda_freq: 0.25
+  lambda_pcc: 0.10
+  lambda_rvq: 1.00
+  alpha_mtm: 1.00
+  beta_mil: 1.00
+  gamma_orth: 0.05
+  delta_clin: 1.00
+  temperature: 0.07
+  mask_ratio: 0.40
+
+optim:
+  epochs: 1
+  batch_size: 2
+  lr: 0.0003
+  weight_decay: 0.01
+  warmup_ratio: 0.10
+  grad_clip: 1.0
+  mixed_precision: false
