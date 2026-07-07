@@ -1,15 +1,7 @@
 # NeuroAlign-EMEG
 
-Reference PyTorch implementation scaffold for **NeuroAlign-EMEG: Sensor-Aware EEG-MEG Foundation Learning with Clinical Report Alignment for Neurodiagnostic Modeling**.
+NeuroAlign-EMEG: Sensor-Aware EEG-MEG Foundation Learning with Clinical Report Alignment for Neurodiagnostic Modeling**.
 
-This repository is structured around the paper's four-stage training strategy:
-
-1. **NeuroTokenizer training** with time, frequency, PCC, and RVQ commitment losses.
-2. **Masked neuro-token modeling** over the fixed neuro-source-time grid.
-3. **Clinical report-guided neuro-text alignment** with bidirectional multi-instance learning and orthogonality regularization.
-4. **Downstream adaptation** for TUAB, TUEV, TUSZ, SomatoMotor, and report retrieval.
-
-> Important: this repo is a reproducibility-ready scaffold. It does not contain TUH/OpenNeuro datasets, private EEG reports, trained checkpoints, or the exact hidden preprocessing manifests used to produce the paper tables. It includes dataset adapters, config files, scripts, metrics, ablation switches, and synthetic smoke tests so the code runs immediately.
 
 ## Repository layout
 
@@ -39,13 +31,6 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -e .
 pip install -r requirements.txt
-```
-
-## Smoke test without data
-
-```bash
-pytest -q
-bash examples/smoke_run.sh
 ```
 
 ## Stage 1: train NeuroTokenizer
@@ -95,21 +80,4 @@ The loaders expect JSONL manifests. Each row can point to EDF/FIF/NPY/PT files a
 
 ```json
 {"record_id":"subject001_session001", "signal_path":"/data/tuh/xxx.edf", "report_path":"/data/reports/xxx.txt", "label":1, "dataset":"TUAB", "subject_id":"subject001"}
-```
-
-Use the helper scripts as templates:
-
-```bash
-python tools/prepare_tuh_eeg.py --root /data/tuh_eeg --out manifests/tuh.jsonl
-python tools/prepare_openneuro_somatomotor.py --root /data/openneuro --out manifests/somatomotor.jsonl
-```
-
-## Citation
-
-```bibtex
-@article{neuroalignemeg2026,
-  title={NeuroAlign-EMEG: Sensor-Aware EEG-MEG Foundation Learning with Clinical Report Alignment for Neurodiagnostic Modeling},
-  author={Alfraihi, Hessa and Mukhtar, Umar Raza and Mukhtar, Hamza},
-  year={2026}
-}
 ```
