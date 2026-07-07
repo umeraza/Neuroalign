@@ -33,6 +33,14 @@ pip install -e .
 pip install -r requirements.txt
 ```
 
+## Dataset manifests
+
+The loaders expect JSONL manifests. Each row can point to EDF/FIF/NPY/PT files and optional report text:
+
+```json
+{"record_id":"subject001_session001", "signal_path":"/data/tuh/xxx.edf", "report_path":"/data/reports/xxx.txt", "label":1, "dataset":"TUAB", "subject_id":"subject001"}
+```
+
 ## Stage 1: train NeuroTokenizer
 
 ```bash
@@ -60,24 +68,4 @@ python scripts/finetune.py --config configs/finetune_tuab.yaml
 python scripts/finetune.py --config configs/finetune_tuev.yaml
 python scripts/finetune.py --config configs/finetune_tusz.yaml
 python scripts/finetune.py --config configs/finetune_somatomotor.yaml
-```
-
-## Ablations
-
-```bash
-python scripts/run_ablation.py --config configs/ablations/no_sensor_encoder.yaml
-python scripts/run_ablation.py --config configs/ablations/no_cross_attention.yaml
-python scripts/run_ablation.py --config configs/ablations/signal_only_no_text.yaml
-python scripts/run_ablation.py --config configs/ablations/no_orthogonality.yaml
-python scripts/run_ablation.py --config configs/ablations/joint_attention.yaml
-python scripts/run_ablation.py --config configs/ablations/no_rvq.yaml
-python scripts/run_ablation.py --config configs/ablations/no_freq_pcc.yaml
-```
-
-## Dataset manifests
-
-The loaders expect JSONL manifests. Each row can point to EDF/FIF/NPY/PT files and optional report text:
-
-```json
-{"record_id":"subject001_session001", "signal_path":"/data/tuh/xxx.edf", "report_path":"/data/reports/xxx.txt", "label":1, "dataset":"TUAB", "subject_id":"subject001"}
 ```
